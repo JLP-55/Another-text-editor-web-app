@@ -17,8 +17,8 @@ If you are seeking to make changes to the code you can first:
 
 #### Links
 
-[Link](https://github.com/JLP-55/Another-text-editor-web-app)to the github repository<br>
-[Link](https://another-text-editor-web-app.onrender.com)to the deployed application<br>
+[Link](https://github.com/JLP-55/Another-text-editor-web-app) to the github repository<br>
+[Link](https://another-text-editor-web-app.onrender.com) to the deployed application<br>
 
 #### Licence
 
