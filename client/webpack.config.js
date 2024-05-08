@@ -21,8 +21,36 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      // add the index.html file to to ./dist folder upon building
+      new HtmlWebpackPlugin({
+        template: "./index.html",
+        title: "JATE"
+      }),
       // create a new instance of workbox plugin and generate a service worker class
-      new WorkboxPlugin.GenerateSW() 
+      new WorkboxPlugin.GenerateSW(),
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js"
+      }),
+      // creates manifest.json
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: "Just Another Text Editor",
+        short_name: "JATE",
+        description: "Edit any text!",
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
+        start_url: "./",
+        publicPath: "./",
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      })
     ],
 
     module: {
@@ -39,7 +67,11 @@ module.exports = () => {
           use: {
             loader: "babel-loader",
             options: {
-              presets: ["@babel/preset-env"]
+              presets: ["@babel/preset-env"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ]
             }
           }
         }
